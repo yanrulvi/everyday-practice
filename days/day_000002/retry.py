@@ -18,7 +18,9 @@ def retry(max_retries=3, delay=1):
         def wrapper(*args, **kwargs):
             for attempt in range(max_retries):
                 try:
-                    return func(*args, **kwargs)
+                    res = func(*args, **kwargs)
+                    print(f"Success after {attempt} retries")
+                    return res
                 except Exception as e:
                     print(f"Retry {attempt+1}/{max_retries}: {e}")
                     time.sleep(delay)
